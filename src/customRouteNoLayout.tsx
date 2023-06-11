@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import { Card, TextField, Button, Stack, MenuItem } from "@mui/material";
-import { useGetList,useGetOne,useRedirect, useGetRecordId,useNotify,useRecordContext,Form,TextInput,SaveButton,ToolbarProps } from 'react-admin';
+import { useGetList,useGetOne,useRedirect, useGetRecordId,useShowContext,useNotify,useRecordContext,Form,TextInput,SaveButton,ToolbarProps } from 'react-admin';
 import { useParams, useNavigate } from "react-router-dom";
 import { useFormState, useForm } from 'react-hook-form';
 import { findId } from './types';
@@ -13,14 +13,17 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
     //     sort: { field: 'id', order: 'ASC' },
     // });
     const record = useRecordContext();
+    //const { isLoading } = useShowContext();
     
     //const recordId = useGetRecordId();
     //using   {`Current record id: ${recordId}`}
     
     const { data, isLoading, error, refetch } = useGetOne(
         'posts',
-        { id: 1 }, 
+        { id: 1}, 
         
+       
+      
     );
 
     const navigate = useNavigate();
@@ -77,7 +80,7 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
 
     const onSubmit = (data:any) => {
         console.log(data); // Logs the title field value
-        redirect('edit', 'posts', 1);
+        redirect('edit', 'posts', data.title);
         
     };
 
@@ -90,7 +93,7 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
     return (
         <div>
             <h1>{title}</h1>    
-            {isLoading ? (
+            {/* {isLoading ? (
                 <p className="app-loader">Loading...</p>
             ) : (
                 <p>
@@ -101,7 +104,7 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
          
    
                 
-            )}
+            )} */}
                     <Form onSubmit={onSubmit}> 
                         {/* onSubmit={handleSubmit} */}
                    <TextInput  source="title" label="License Plate"  /> 
