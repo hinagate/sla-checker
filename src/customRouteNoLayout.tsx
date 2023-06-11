@@ -1,19 +1,30 @@
 import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import { Card, TextField, Button, Stack, MenuItem } from "@mui/material";
-import { useGetList,useRedirect,useNotify,useRecordContext,Form,TextInput,SaveButton,ToolbarProps } from 'react-admin';
-import { useNavigate } from "react-router-dom";
-import { useFormState } from 'react-hook-form';
+import { useGetList,useGetOne,useRedirect, useGetRecordId,useNotify,useRecordContext,Form,TextInput,SaveButton,ToolbarProps } from 'react-admin';
+import { useParams, useNavigate } from "react-router-dom";
+import { useFormState, useForm } from 'react-hook-form';
 import { findId } from './types';
 
 
 const CustomRouteNoLayout = ({ title = 'Posts' })  => {
-    const { isLoading, total } = useGetList('posts', {
-        pagination: { page: 0, perPage: 10 },
-        sort: { field: 'id', order: 'ASC' },
-    });
+    // const { isLoading, total } = useGetList('posts', {
+    //     pagination: { page: 0, perPage: 10 },
+    //     sort: { field: 'id', order: 'ASC' },
+    // });
+    const record = useRecordContext();
+    
+    //const recordId = useGetRecordId();
+    //using   {`Current record id: ${recordId}`}
+    
+    const { data, isLoading, error, refetch } = useGetOne(
+        'posts',
+        { id: 1 }, 
+        
+    );
 
     const navigate = useNavigate();
+    const { id } = useParams();
 
     function handleClick() {
       navigate("/posts");
@@ -26,11 +37,12 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
     }
  
     const ReviewEditToolbar = (props: ToolbarProps) => {
-            const { resource, saving } = props;
+            const { resource} = props;
             const redirect = useRedirect();
             const { isValid } = useFormState();
             const notify = useNotify();
             const record = useRecordContext<findId>(props);
+            const { register, handleSubmit } = useForm();
     
     return (
         <Toolbar
@@ -41,13 +53,39 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
             minHeight: { sm: 0 },
             
         }}
-    >
+        >
         <HandleSubmitButton/>
-        </Toolbar>
+         </Toolbar>
            
            );
     };
+    
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (!newIdentity) return;
+    //     fetch('/update_identity', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ identity: newIdentity })
+    //     }).then(() => { 
+    //         // call authProvider.getIdentity() again and notify the listeners of the result,
+    //         // including the UserMenu in the AppBar
+    //         refetch();
+    //      });
+    // };
+    const redirect = useRedirect();
 
+    const onSubmit = (data:any) => {
+        console.log(data); // Logs the title field value
+        redirect('edit', 'posts', 1);
+        
+    };
+
+    // const handleSubmit = (value:any) => {
+    //          value.preventDefault();
+             
+    //         };
+    
  
     return (
         <div>
@@ -56,13 +94,22 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
                 <p className="app-loader">Loading...</p>
             ) : (
                 <p>
-                    Found <span className="total">{total}</span> posts !
+                    Found <span className="total">{data?.title}</span> posts !
+                    
                 </p>
+
+         
+   
                 
             )}
-                    <Form> 
-                   <TextInput  source="id" label="License Plate"  /> <ReviewEditToolbar/>
+                    <Form onSubmit={onSubmit}> 
+                        {/* onSubmit={handleSubmit} */}
+                   <TextInput  source="title" label="License Plate"  /> 
                    
+                   <ReviewEditToolbar/>
+                       <p>
+ 
+        </p>
                   
                   
                     </Form>
