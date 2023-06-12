@@ -3,7 +3,7 @@ export default {
     
     VRN: [  
         {
-            id:1,
+            id:'AM1234',
             SLA_NO: 'GC/2 2023',
             Fault_Call_SER: 'True',
 

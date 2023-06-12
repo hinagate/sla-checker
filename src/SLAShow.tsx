@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useGetOne, useRedirect, Title } from 'react-admin';
+import { useGetOne, useRedirect, Title,useNotify } from 'react-admin';
 import { Card, Stack, Typography } from '@mui/material';
 
 /**
@@ -9,11 +9,18 @@ const SLAShow = () => {
     const { id } = useParams(); // this component is rendered in the /books/:id path
     const redirect = useRedirect();
     console.log({id});
+    const notify = useNotify();
     const { data, isLoading } = useGetOne(
         'VRN',
         { id },
-        // redirect to the list if the book is not found
-        { onError: () => redirect('/posts') }
+        
+        // redirect to the the mainsearch page if the VRN is not found
+        { onError: () =>
+            {
+            redirect('/custom1')
+            notify(`Error: ${id} not found`);    
+        }
+        }
     );
     if (isLoading) { return <div>Loading</div>; }
     return (

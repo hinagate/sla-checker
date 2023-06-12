@@ -80,7 +80,7 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
 
     const onSubmit = (data:any) => {
         console.log(data); // Logs the title field value
-        redirect('edit', 'posts', data.title);
+        redirect('edit', 'VRN', data.VRN.toUpperCase());
         
     };
 
@@ -107,7 +107,7 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
             )} */}
                     <Form onSubmit={onSubmit}> 
                         {/* onSubmit={handleSubmit} */}
-                   <TextInput  source="title" label="License Plate"  /> 
+                   <TextInput  source="VRN" label="License Plate"  /> 
                    
                    <ReviewEditToolbar/>
                        <p>
