@@ -1,15 +1,28 @@
 // in src/admin/index.tsx
 import { Admin, Resource, ListGuesser, CustomRoutes } from "react-admin";
-import { Route } from 'react-router-dom';
+import { Route , useNavigate} from 'react-router-dom';
 import jsonServerProvider from "ra-data-json-server";
 import CustomRouteNoLayout from './customRouteNoLayout';
-import SLAShow from './SLAShow';
+import SLA from './SLA';
 import dataProvider from './dataProvider_bak';
 
 //const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 
+
+const Dashboard = () => {
+  const navigate = useNavigate();
+
+  navigate('/searchvrn');
+
+  return null; // you can return null, or some loading spinner if you'd like
+}
+
 const App = () => (
-  <Admin dataProvider={dataProvider}>
+
+  <Admin dataProvider={dataProvider} 
+  dashboard={Dashboard}
+  
+  >
     <Resource name="posts" list={ListGuesser} />
     <Resource name="comments" list={ListGuesser} />
 
@@ -17,7 +30,7 @@ const App = () => (
     <Route
                             path="/VRN/:id"
                             element={
-                            <SLAShow />
+                            <SLA.show/>
                             }
 
                             />
@@ -25,9 +38,9 @@ const App = () => (
 
     <CustomRoutes noLayout>
                         <Route
-                            path="/custom1"
+                            path="/searchvrn"
                             element={
-                                <CustomRouteNoLayout title="Posts from /custom1" />
+                                <CustomRouteNoLayout title="Check SLA by license plate" />
                             }
                         />
                  

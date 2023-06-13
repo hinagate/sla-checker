@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import { Card, TextField, Button, Stack, MenuItem } from "@mui/material";
-import { useGetList,useGetOne,useRedirect, useGetRecordId,useShowContext,useNotify,useRecordContext,Form,TextInput,SaveButton,ToolbarProps } from 'react-admin';
+import { useGetList,useGetOne,useRedirect, useGetRecordId,useShowContext,useNotify,useRecordContext,Form,TextInput,SaveButton,ToolbarProps, required } from 'react-admin';
 import { useParams, useNavigate } from "react-router-dom";
 import { useFormState, useForm } from 'react-hook-form';
 import { findId } from './types';
@@ -29,9 +29,9 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    function handleClick() {
-      navigate("/posts");
-    }
+    // function handleClick() {
+    //   navigate("/posts");
+    // }
 
     const HandleSubmitButton = () => {
         return (
@@ -100,19 +100,14 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
                     Found <span className="total">{data?.title}</span> posts !
                     
                 </p>
-
-         
-   
                 
             )} */}
                     <Form onSubmit={onSubmit}> 
                         {/* onSubmit={handleSubmit} */}
-                   <TextInput  source="VRN" label="License Plate"  /> 
+                   <TextInput  source="VRN" label="Enter License Plate"  validate={required()}/> 
                    
                    <ReviewEditToolbar/>
-                       <p>
- 
-        </p>
+               
                   
                   
                     </Form>

@@ -4,8 +4,21 @@ export default {
     VRN: [  
         {
             id:'AM1234',
-            SLA_NO: 'GC/2 2023',
+            VRN: "AM90",
+            TDVRN : "MK7239",
+            Equipment : "30001001",
+            Dept:'HKPF',
+            SLA_NO: '400587',
+            
+            },
+            
+    ],
+    SLA_item: [  
+        {
+            id:'400587',
+            SLA_NO: '400587',
             Fault_Call_SER: 'True',
+            Parts_Ceiliing: 2500,
 
             },
             
