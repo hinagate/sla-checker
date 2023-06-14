@@ -1,5 +1,5 @@
 import { useParams,Link as RouterLink } from 'react-router-dom';
-import { useGetOne, useRedirect, Title,useNotify,Form, Labeled,NumberField,useRecordContext, TextInput,TextField, SimpleForm, Edit } from 'react-admin';
+import { useGetOne, useRedirect, Title,useNotify,Form, Labeled,NumberField,useRecordContext, TextInput,TextField, SimpleForm, Edit,CheckboxGroupInput } from 'react-admin';
 import { Card,Stack, CardContent, Box, Grid, Typography, Link } from '@mui/material';
 
 /**
