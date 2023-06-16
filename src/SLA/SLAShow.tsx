@@ -16,7 +16,9 @@ import {
   Create,
   ReferenceInput,
   RecordContextProvider,
-  CheckboxGroupInput 
+  CheckboxGroupInput ,
+  Toolbar,
+  SaveButton
 } from "react-admin";
 import {
   Card,
@@ -26,6 +28,7 @@ import {
   Grid,
   Typography,
   Link,
+
 } from "@mui/material";
 
 const SLAShow = () => {
@@ -66,10 +69,33 @@ const SLAShow = () => {
     );
   };
 
+
+  const ReturnButtonToolbar = () => {
+    const redirect = useRedirect();
+    const notify = useNotify();
+    return (
+        <Toolbar>
+    
+            <SaveButton alwaysEnable
+                label="BACK"
+                mutationOptions={{
+                    onSuccess:()=> {
+                        
+                      redirect("/searchvrn");;
+                    }}
+                }
+                type="button"
+                //variant="text"
+            />
+        </Toolbar>
+    );
+};
+  
   return (
     //embed data and id(from Params) to edit and simple form
     <Edit resource="VRN" id={id}>
-      <SimpleForm defaultValues={data} toolbar={false}>
+      <SimpleForm defaultValues={data}  toolbar={<ReturnButtonToolbar />}>   
+        {/* toolbar={false}> */}
         {/* Start Form UI elements: */}
         <div>
           {/* Start SLA information block */}
