@@ -40,7 +40,7 @@ const App = () => (
                         <Route
                             path="/searchvrn"
                             element={
-                                <CustomRouteNoLayout title="Check SLA by license plate" />
+                                <CustomRouteNoLayout title="Check SLA by license plate (Test data AM90)" />
                             }
                         />
                  
