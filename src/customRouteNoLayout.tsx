@@ -104,7 +104,7 @@ const CustomRouteNoLayout = ({ title = 'Posts' })  => {
             )} */}
                     <Form onSubmit={onSubmit}> 
                         {/* onSubmit={handleSubmit} */}
-                   <TextInput  source="VRN" label="Enter License Plate (Test data AM90"  validate={required()}/> 
+                   <TextInput  source="VRN" label="Enter License Plate"  validate={required()}/> 
                    
                    <ReviewEditToolbar/>
                
